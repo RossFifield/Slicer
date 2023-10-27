@@ -43,6 +43,8 @@ namespace Assets.Scripts
         private bool _smoothVertices = false;
         private bool _createReverseTriangleWindings = false;
 
+        private float _originalVolume;
+
         public bool IsSolid
         {
             get
@@ -84,7 +86,28 @@ namespace Assets.Scripts
             }
         }
 
-        public SlicesMetadata(Plane plane, Mesh mesh, bool isSolid, bool createReverseTriangleWindings, bool shareVertices, bool smoothVertices)
+        public List<Vector3> PointsAlongPlane
+        {
+            get
+            {
+                return _pointsAlongPlane;
+            }
+
+        }
+
+        public float OriginalVolume
+        {
+            get
+            {
+                return _originalVolume;
+            }
+            set
+            {
+                _originalVolume = value;
+            }
+        }
+
+        public SlicesMetadata(Plane plane, Mesh mesh, bool isSolid, bool createReverseTriangleWindings, bool shareVertices, bool smoothVertices, float originalVolume = 0)
         {
             _positiveSideTriangles = new List<int>();
             _positiveSideVertices = new List<Vector3>();
@@ -98,6 +121,16 @@ namespace Assets.Scripts
             _plane = plane;
             _mesh = mesh;
             _isSolid = isSolid;
+
+            if (originalVolume == 0)
+            {
+                _originalVolume = mesh.bounds.size.x * mesh.bounds.size.y * mesh.bounds.size.z;
+            }
+            else
+            {
+                _originalVolume = originalVolume;
+            }
+
             _createReverseTriangleWindings = createReverseTriangleWindings;
             _useSharedVertices = shareVertices;
             _smoothVertices = smoothVertices;

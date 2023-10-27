@@ -135,6 +135,11 @@ public class Lighsaber : MonoBehaviour
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
 
+        Vector3[] triangle = new Vector3[3];
+        triangle[0] = _triggerEnterTipPosition;
+        triangle[1] = _triggerEnterBasePosition;
+        triangle[2] = _triggerExitTipPosition;
+
         //Get the point perpendicular to the triangle above which is the normal
         //https://docs.unity3d.com/Manual/ComputingNormalPerpendicularVector.html
         Vector3 normal = Vector3.Cross(side1, side2).normalized;
@@ -159,7 +164,7 @@ public class Lighsaber : MonoBehaviour
             plane = plane.flipped;
         }
 
-        GameObject[] slices = Slicer.Slice(plane, other.gameObject);
+        GameObject[] slices = Slicer.Slice(plane, other.gameObject,triangle);
         if (slices == null)
         {
             return;

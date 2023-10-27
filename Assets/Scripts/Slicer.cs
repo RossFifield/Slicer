@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -13,7 +14,7 @@ namespace Assets.Scripts
         /// <param name="plane"></param>
         /// <param name="objectToCut"></param>
         /// <returns></returns>
-        public static GameObject[] Slice(Plane plane, GameObject objectToCut)
+        public static GameObject[] Slice(Plane plane, GameObject objectToCut, Vector3[] triangle)
         {            
             //Get the current mesh and its verts and tris
             Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
@@ -28,12 +29,61 @@ namespace Assets.Scripts
             }
             
             //Create left and right slice of hollow object
-            SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);            
+            SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
 
-            GameObject positiveObject = CreateMeshGameObject(objectToCut);
+            // calculate the area of the Triangle that covers the slicesMeta.PointsAlongPlane polygon. and the area of the polygon and see if it is enough to cut.
+
+            List<Vector3> intersectedPoints = slicesMeta.PointsAlongPlane;
+
+            double midCount = intersectedPoints.Count / 2;
+            Debug.Log("Intersected count: " + intersectedPoints.Count);
+
+            Vector3 middlePoint = intersectedPoints[0] + (intersectedPoints[0] - intersectedPoints[(int)Math.Floor(midCount)]) / 2;
+            middlePoint = objectToCut.transform.TransformVector(middlePoint);
+            Debug.Log("mid point: "+middlePoint);
+            float polygonArea = 0;
+
+            Vector3 lastPoint = objectToCut.transform.TransformVector(intersectedPoints.Last());
+
+            Vector3 closesPointToBase = lastPoint;
+            float minimumDistance = 99999999999;
+
+            foreach (Vector3 point in intersectedPoints)
+            {
+                Vector3 localizedPoint = objectToCut.transform.TransformVector(point);
+                Debug.Log("current point: " + point);
+                Debug.Log("last point: " + lastPoint);
+                // add the triangle area to the polygon area
+                polygonArea += (Vector3.Cross(middlePoint - localizedPoint, middlePoint - lastPoint).magnitude) / 2;
+                //Debug.Log("Current polygon area: " + polygonArea);
+                // find the distance between current point and base 
+                float distance = Vector3.Distance(localizedPoint, triangle[1]);
+                //Debug.Log("Current distance: " + distance);
+                if (distance < minimumDistance)
+                {
+                    closesPointToBase = localizedPoint;
+                    minimumDistance = distance;
+                }
+                //update last point for triangulation
+                lastPoint = localizedPoint;
+            }
+            Debug.Log("Final minimum distance: " + minimumDistance);
+            float cutArea = (Vector3.Cross(triangle[0] - closesPointToBase, triangle[0] - triangle[2]).magnitude) / 2;
+            Debug.Log("closest to base: " + closesPointToBase);
+            Debug.Log("tip enter: " + triangle[0]);
+            Debug.Log("tip out: " + triangle[1]);
+            Debug.Log("Cut area: " + cutArea);
+            Debug.Log("Polygon area: " + polygonArea);
+            if (cutArea <= polygonArea * 0.3)
+            {
+                
+                return null;
+            }
+
+            GameObject positiveObject = CreateMeshGameObject(objectToCut, slicesMeta.OriginalVolume);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
 
-            GameObject negativeObject = CreateMeshGameObject(objectToCut);
+            GameObject negativeObject = CreateMeshGameObject(objectToCut, slicesMeta.OriginalVolume);
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);
 
             var positiveSideMeshData = slicesMeta.PositiveSideMesh;
@@ -53,7 +103,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="originalObject">The original object.</param>
         /// <returns></returns>
-        private static GameObject CreateMeshGameObject(GameObject originalObject)
+        private static GameObject CreateMeshGameObject(GameObject originalObject, float originalVolume)
         {
             var originalMaterial = originalObject.GetComponent<MeshRenderer>().materials;
 
@@ -67,6 +117,7 @@ namespace Assets.Scripts
             sliceable.IsSolid = originalSliceable.IsSolid;
             sliceable.ReverseWireTriangles = originalSliceable.ReverseWireTriangles;
             sliceable.UseGravity = originalSliceable.UseGravity;
+            sliceable.OriginalVolume = originalVolume;
 
             meshGameObject.GetComponent<MeshRenderer>().materials = originalMaterial;
 
