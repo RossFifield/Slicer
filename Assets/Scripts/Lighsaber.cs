@@ -172,10 +172,10 @@ public class Lighsaber : MonoBehaviour
         Destroy(other.gameObject);
 
         //slices[0].GetComponent<MeshFilter>().mesh.RecalculateUVDistributionMetrics();
-        slices[0].GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        //slices[0].GetComponent<MeshFilter>().mesh.RecalculateNormals();
         slices[0].GetComponent<MeshFilter>().mesh.Optimize();
         //slices[1].GetComponent<MeshFilter>().mesh.RecalculateUVDistributionMetrics();
-        slices[1].GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        //slices[1].GetComponent<MeshFilter>().mesh.RecalculateNormals();
         slices[1].GetComponent<MeshFilter>().mesh.Optimize();
 
 
