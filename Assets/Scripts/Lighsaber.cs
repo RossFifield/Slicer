@@ -8,9 +8,9 @@ public class Lighsaber : MonoBehaviour
     //The number of vertices to create per frame
     private const int NUM_VERTICES = 12;
 
-    [SerializeField]
-    [Tooltip("The blade object")]
-    private GameObject _blade = null;
+    // [SerializeField]
+    // [Tooltip("The blade object")]
+    // private GameObject _blade = null;
      
     [SerializeField]
     [Tooltip("The empty game object located at the tip of the blade")]
@@ -20,13 +20,13 @@ public class Lighsaber : MonoBehaviour
     [Tooltip("The empty game object located at the base of the blade")]
     private GameObject _base = null;
 
-    [SerializeField]
-    [Tooltip("The mesh object with the mesh filter and mesh renderer")]
-    private GameObject _meshParent = null;
+    // [SerializeField]
+    // [Tooltip("The mesh object with the mesh filter and mesh renderer")]
+    // private GameObject _meshParent = null;
 
-    [SerializeField]
-    [Tooltip("The number of frame that the trail should be rendered for")]
-    private int _trailFrameLength = 3;
+    // [SerializeField]
+    // [Tooltip("The number of frame that the trail should be rendered for")]
+    // private int _trailFrameLength = 3;
 
     [SerializeField]
     [ColorUsage(true, true)]
