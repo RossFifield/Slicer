@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private int enemyCount = 0;
     [SerializeField]
-    private int killCount = 0;
+    public int killCount = 0;
 
     private static EnemyManager instance = null;
     public static EnemyManager GetInstance()
