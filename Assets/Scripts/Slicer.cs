@@ -14,6 +14,8 @@ namespace Assets.Scripts
         /// <param name="plane"></param>
         /// <param name="objectToCut"></param>
         /// <returns></returns>
+        /// 
+        private static double cutThreshold=0.3;
         public static GameObject[] Slice(Plane plane, GameObject objectToCut, Vector3[] triangle)
         {            
             //Get the current mesh and its verts and tris
@@ -36,11 +38,11 @@ namespace Assets.Scripts
             List<Vector3> intersectedPoints = slicesMeta.PointsAlongPlane;
 
             double midCount = intersectedPoints.Count / 2;
-            Debug.Log("Intersected count: " + intersectedPoints.Count);
+
+            Debug.Log("access index for middle point: "+(int)Math.Floor(midCount));
 
             Vector3 middlePoint = intersectedPoints[0] + (intersectedPoints[0] - intersectedPoints[(int)Math.Floor(midCount)]) / 2;
             middlePoint = objectToCut.transform.TransformVector(middlePoint);
-            Debug.Log("mid point: "+middlePoint);
             float polygonArea = 0;
 
             Vector3 lastPoint = objectToCut.transform.TransformVector(intersectedPoints.Last());
@@ -51,14 +53,11 @@ namespace Assets.Scripts
             foreach (Vector3 point in intersectedPoints)
             {
                 Vector3 localizedPoint = objectToCut.transform.TransformVector(point);
-                Debug.Log("current point: " + point);
-                Debug.Log("last point: " + lastPoint);
                 // add the triangle area to the polygon area
                 polygonArea += (Vector3.Cross(middlePoint - localizedPoint, middlePoint - lastPoint).magnitude) / 2;
-                //Debug.Log("Current polygon area: " + polygonArea);
+
                 // find the distance between current point and base 
                 float distance = Vector3.Distance(localizedPoint, triangle[1]);
-                //Debug.Log("Current distance: " + distance);
                 if (distance < minimumDistance)
                 {
                     closesPointToBase = localizedPoint;
@@ -67,16 +66,10 @@ namespace Assets.Scripts
                 //update last point for triangulation
                 lastPoint = localizedPoint;
             }
-            Debug.Log("Final minimum distance: " + minimumDistance);
-            float cutArea = (Vector3.Cross(triangle[0] - closesPointToBase, triangle[0] - triangle[2]).magnitude) / 2;
-            Debug.Log("closest to base: " + closesPointToBase);
-            Debug.Log("tip enter: " + triangle[0]);
-            Debug.Log("tip out: " + triangle[1]);
-            Debug.Log("Cut area: " + cutArea);
-            Debug.Log("Polygon area: " + polygonArea);
-            if (cutArea <= polygonArea * 0.3)
+
+            float cutArea = Vector3.Cross(triangle[0] - closesPointToBase, triangle[0] - triangle[2]).magnitude / 2;
+            if (cutArea <= polygonArea * cutThreshold)
             {
-                
                 return null;
             }
 

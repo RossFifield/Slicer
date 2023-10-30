@@ -121,14 +121,12 @@ public class Sliceable : MonoBehaviour
         float volume = 0;
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
-        //Debug.Log("These are my triangles: " + mesh.triangles.Length);
         for (int i = 0; i < mesh.triangles.Length; i += 3)
         {
             Vector3 p1 = vertices[triangles[i + 0]];
             Vector3 p2 = vertices[triangles[i + 1]];
             Vector3 p3 = vertices[triangles[i + 2]];
             volume += SignedVolumeOfTriangle(p1, p2, p3);
-            //Debug.Log("This is Triangle " + i + " of size: " + SignedVolumeOfTriangle(p1, p2, p3));
         }
         return Mathf.Abs(volume);
     }
