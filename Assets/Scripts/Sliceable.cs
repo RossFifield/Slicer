@@ -21,6 +21,10 @@ public class Sliceable : MonoBehaviour
     private bool _smoothVertices = false;
 
     [SerializeField]
+    [Range(0f, 1f)]
+    private float _destroyThreshold = 0.05f;
+
+    [SerializeField]
     private float _originalVolume = 0;
 
     public bool IsSolid
@@ -99,7 +103,7 @@ public class Sliceable : MonoBehaviour
         Mesh mesh = this.GetComponent<MeshFilter>().mesh;
         float thisVolume = VolumeOfMesh(mesh);
 
-        if (thisVolume <= _originalVolume * 0.05)
+        if (thisVolume <= _originalVolume * _destroyThreshold)
         {
             Destroy(this.gameObject);
         }

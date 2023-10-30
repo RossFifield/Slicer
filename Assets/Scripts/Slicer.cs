@@ -15,7 +15,7 @@ namespace Assets.Scripts
         /// <param name="objectToCut"></param>
         /// <returns></returns>
         /// 
-        private static double cutThreshold=0.3;
+        private static float cutThreshold = 0.3f;
         public static GameObject[] Slice(Plane plane, GameObject objectToCut, Vector3[] triangle)
         {            
             //Get the current mesh and its verts and tris
