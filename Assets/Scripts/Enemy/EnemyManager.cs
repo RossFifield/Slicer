@@ -34,12 +34,12 @@ public class EnemyManager : MonoBehaviour
         if (enemySet.Contains(enemy))
         {
             enemySet.Remove(enemy);
+            killCount++;
         }
         else
         {
             Debug.Log("CANT UNSUB SINCE ALREADY UNSUBBED");
         }
-        killCount++;
     }
 
     private void Awake()
