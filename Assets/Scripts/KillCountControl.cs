@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class KillCountControl : MonoBehaviour
 {
-    public GameObject enemyController;
     private TMP_Text text;
     private EnemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<TMP_Text>();
-        enemyManager = enemyController.GetComponent<EnemyManager>();
+        enemyManager = EnemyManager.GetInstance();
     }
 
     // Update is called once per frame
