@@ -10,6 +10,8 @@ public class EnemyManager : MonoBehaviour
     private HashSet<Enemy> enemySet;
     [SerializeField]
     private int enemyCount = 0;
+    [SerializeField]
+    private int killCount = 0;
 
     private static EnemyManager instance = null;
     public static EnemyManager GetInstance()
@@ -32,6 +34,7 @@ public class EnemyManager : MonoBehaviour
         if (enemySet.Contains(enemy))
         {
             enemySet.Remove(enemy);
+            killCount++;
         }
         else
         {
