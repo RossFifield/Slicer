@@ -16,15 +16,18 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
+    private Animator anim;
 
     [HideInInspector]
     public bool canMove = true;
     public int health = 3;
+    private Collider shield;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        shield = GetComponentInChildren<Collider>();
+        anim = GetComponent<Animator>();
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -72,6 +75,24 @@ public class PlayerController : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+
+        //Blocking or not
+        if(Input.GetMouseButtonDown(1)){
+            anim.SetBool("Blocking",true);
+            shield.enabled=true;
+        }
+        if(Input.GetMouseButtonUp(1)){
+            anim.SetBool("Blocking",false);
+            shield.enabled=false;
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Bullet")){
+            Destroy(other.gameObject);
+            Debug.Log("Bullet hit!");
+
         }
     }
 }

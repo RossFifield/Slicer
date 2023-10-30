@@ -2,19 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public float timeLimit=300;
     public int killCountTarget= 30;
     public GameObject character;
-    public GameObject gameManager;
-    private int killCount=0;
+    public GameObject gameManager;    
 
     private float startTime;
 
     [HideInInspector]
     public float currentTime;
+    public int killCount=0;
+
 
     // Start is called before the first frame update
     void Start()
