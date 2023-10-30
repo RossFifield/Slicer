@@ -22,21 +22,16 @@ public class SwordSwing : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(SwordSwing2());
-        }
-
-        if(Input.GetMouseButtonDown(1)){
-            anim.SetBool("Blocking",true);
-        }
-        if(Input.GetMouseButtonUp(1)){
-            anim.SetBool("Blocking",false);
-        }
-       
+        }       
     }
     IEnumerator SwordSwing2()
     {
         
         mesh.enabled = true;
         anim.SetTrigger("Cut");
+         //play slicing sound
+        GetComponent<AudioSource>().Play();
+        //wait to finish animation
         yield return new WaitForSeconds(1.0f);
         //Sword.GetComponent<Animator>().Play("NewState");
         mesh.enabled = false;

@@ -15,7 +15,7 @@ namespace Assets.Scripts
         /// <param name="objectToCut"></param>
         /// <returns></returns>
         /// 
-        private static float cutThreshold = 0.3f;
+        //private static float cutThreshold = 0.3f;
         public static GameObject[] Slice(Plane plane, GameObject objectToCut, Vector3[] triangle)
         {            
             //Get the current mesh and its verts and tris
@@ -33,45 +33,46 @@ namespace Assets.Scripts
             //Create left and right slice of hollow object
             SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
 
+            // Deprecated?
             // calculate the area of the Triangle that covers the slicesMeta.PointsAlongPlane polygon. and the area of the polygon and see if it is enough to cut.
 
-            List<Vector3> intersectedPoints = slicesMeta.PointsAlongPlane;
+            // List<Vector3> intersectedPoints = slicesMeta.PointsAlongPlane;
 
-            double midCount = intersectedPoints.Count / 2;
+            // double midCount = intersectedPoints.Count / 2;
 
-            Debug.Log("access index for middle point: "+(int)Math.Floor(midCount));
+            // Debug.Log("access index for middle point: "+(int)Math.Floor(midCount));
 
-            Vector3 middlePoint = intersectedPoints[0] + (intersectedPoints[0] - intersectedPoints[(int)Math.Floor(midCount)]) / 2;
-            middlePoint = objectToCut.transform.TransformVector(middlePoint);
-            float polygonArea = 0;
+            // Vector3 middlePoint = intersectedPoints[0] + (intersectedPoints[0] - intersectedPoints[(int)Math.Floor(midCount)]) / 2;
+            // middlePoint = objectToCut.transform.TransformVector(middlePoint);
+            // float polygonArea = 0;
 
-            Vector3 lastPoint = objectToCut.transform.TransformVector(intersectedPoints.Last());
+            // Vector3 lastPoint = objectToCut.transform.TransformVector(intersectedPoints.Last());
 
-            Vector3 closesPointToBase = lastPoint;
-            float minimumDistance = 99999999999;
+            // Vector3 closesPointToBase = lastPoint;
+            // float minimumDistance = 99999999999;
 
-            foreach (Vector3 point in intersectedPoints)
-            {
-                Vector3 localizedPoint = objectToCut.transform.TransformVector(point);
-                // add the triangle area to the polygon area
-                polygonArea += (Vector3.Cross(middlePoint - localizedPoint, middlePoint - lastPoint).magnitude) / 2;
+            // foreach (Vector3 point in intersectedPoints)
+            // {
+            //     Vector3 localizedPoint = objectToCut.transform.TransformVector(point);
+            //     // add the triangle area to the polygon area
+            //     polygonArea += (Vector3.Cross(middlePoint - localizedPoint, middlePoint - lastPoint).magnitude) / 2;
 
-                // find the distance between current point and base 
-                float distance = Vector3.Distance(localizedPoint, triangle[1]);
-                if (distance < minimumDistance)
-                {
-                    closesPointToBase = localizedPoint;
-                    minimumDistance = distance;
-                }
-                //update last point for triangulation
-                lastPoint = localizedPoint;
-            }
+            //     // find the distance between current point and base 
+            //     float distance = Vector3.Distance(localizedPoint, triangle[1]);
+            //     if (distance < minimumDistance)
+            //     {
+            //         closesPointToBase = localizedPoint;
+            //         minimumDistance = distance;
+            //     }
+            //     //update last point for triangulation
+            //     lastPoint = localizedPoint;
+            // }
 
-            float cutArea = Vector3.Cross(triangle[0] - closesPointToBase, triangle[0] - triangle[2]).magnitude / 2;
-            if (cutArea <= polygonArea * cutThreshold)
-            {
-                return null;
-            }
+            // float cutArea = Vector3.Cross(triangle[0] - closesPointToBase, triangle[0] - triangle[2]).magnitude / 2;
+            // if (cutArea <= polygonArea * cutThreshold)
+            // {
+            //     return null;
+            // }
 
             GameObject positiveObject = CreateMeshGameObject(objectToCut, slicesMeta.OriginalVolume);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
