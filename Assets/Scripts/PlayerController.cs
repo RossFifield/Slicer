@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
-
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
     [HideInInspector]
     public bool canMove = true;
+    public int health = 3;
 
     void Start()
     {
@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // TODO: Set starting health bar or indicator
+
     }
 
     void Update()
