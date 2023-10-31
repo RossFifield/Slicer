@@ -32,7 +32,12 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+        //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.MovePosition(transform.position + direction * speed);
     }
 
     private void OnTriggerEnter(Collider other)
