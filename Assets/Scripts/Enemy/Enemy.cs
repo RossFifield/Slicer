@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private float minDistance;
+
+    [SerializeField] 
+    private float maxDistance;
+
     private Transform player;
     private EnemyManager enemyManager;
     private CharacterController characterController;
@@ -30,10 +36,23 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 playerDirection = (player.position - transform.position).normalized;
-        characterController.SimpleMove(playerDirection * speed);
         transform.LookAt(player.position);
-        shooter.Shoot(playerDirection, "Player");
+        Vector3 playerDirection = player.position - transform.position;
+        float distance = playerDirection.magnitude;
+        playerDirection.Normalize();
+        if (distance < maxDistance)
+        {
+            shooter.Shoot(playerDirection, "Player");
+        }
+        if (distance < minDistance - 0.05)
+        {
+            playerDirection = -playerDirection;
+        }
+        else if (distance < minDistance + 0.01)
+        {
+            playerDirection = Vector3.zero;
+        }
+        characterController.SimpleMove(playerDirection * speed);
  
     }
 

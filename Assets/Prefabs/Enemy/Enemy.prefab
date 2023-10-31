@@ -222,6 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  minDistance: 10
+  maxDistance: 30
 --- !u!114 &882702158461065755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +239,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
   origin: {fileID: 1467047042918258066}
   shootCoolDown: 0.5
+  inaccuracy: 0.5
 --- !u!82 &2354456109427303995
 AudioSource:
   m_ObjectHideFlags: 0
