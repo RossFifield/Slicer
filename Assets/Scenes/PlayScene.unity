@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9483456a2cc1f0846afd8a468ac5adf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAudio: 5
 --- !u!4 &222633346
 Transform:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &222633347
 AudioSource:
@@ -561,7 +562,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 340551500}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &612838939
 BoxCollider:
@@ -1810,11 +1811,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686923982701663425, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3686923982701663425, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.428
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3792080014776194257, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: shield

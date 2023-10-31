@@ -62,7 +62,6 @@ public class AudioManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(clip,position.position);
             StartCoroutine(SoundEndIn(clip.length, soundpath));
         }
-        Debug.Log(currentAudio[soundpath]);
     }
     public void SoundEnded(string soundpath){
         currentAudio[soundpath] = currentAudio[soundpath] - 1;
