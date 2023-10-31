@@ -26,7 +26,13 @@ public class EnemyManager : MonoBehaviour
 
     public void Add(Enemy enemy)
     {
+        if (enemyCount >= 5)
+        {
+            Destroy(enemy.gameObject);
+            return;
+        }
         enemySet.Add(enemy);
+
     }
 
     public void Unsubscribe(Enemy enemy)
