@@ -15,10 +15,12 @@ public class Shooter : MonoBehaviour
 
     private float timeSinceLastShot;
     private bool shootable = false;
+
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class Shooter : MonoBehaviour
         Bullet newBullet = Instantiate(bulletPrefab, origin.position, Quaternion.identity).GetComponent<Bullet>();
         newBullet.SetDirection(direction);
         newBullet.SetTarget(targetTag);
+        audio.Play();
         timeSinceLastShot = 0;
         shootable = false;
     }
