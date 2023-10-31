@@ -37,6 +37,8 @@ public class Lighsaber : MonoBehaviour
     [Tooltip("The amount of force applied to each side of a slice")]
     private float _forceAppliedToCut = 3f;
 
+    public Collider shield;
+
     private Mesh _mesh;
     private MeshCollider _meshCollider;
     private Animator _anim;
@@ -70,6 +72,15 @@ public class Lighsaber : MonoBehaviour
         {
             StartCoroutine(SwordSwing2());
         }
+        //Blocking or not
+        if(Input.GetMouseButtonDown(1)){
+            _anim.SetBool("Blocking",true);
+            shield.enabled=true;
+        }
+        if(Input.GetMouseButtonUp(1)){
+            _anim.SetBool("Blocking",false);
+            shield.enabled=false;
+        }
     }
     
     void LateUpdate()
@@ -90,7 +101,7 @@ public class Lighsaber : MonoBehaviour
     {
         _triggerExitTipPosition = _tip.transform.position;
         Sliceable sliced = other.GetComponent<Sliceable>();
-        if(sliced != null){
+        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSwing")){
             CutSomething(other);
         }       
     }
@@ -154,14 +165,12 @@ public class Lighsaber : MonoBehaviour
 
     IEnumerator SwordSwing2()
     {
-        
         _meshCollider.enabled = true;
         _anim.SetTrigger("Cut");
          //play slicing sound
         GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);
-        //Sword.GetComponent<Animator>().Play("NewState");
         _meshCollider.enabled = false;
     }
 }
