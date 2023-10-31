@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
     private EnemyManager enemyManager;
     private CharacterController characterController;
     private Shooter shooter;
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,9 @@ public class Enemy : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         player = enemyManager.GetPlayerTransform();
         shooter = GetComponent<Shooter>();
+        agent = GetComponent<NavMeshAgent>();
+
+        agent.stoppingDistance = minDistance;
     }
 
     // Update is called once per frame
@@ -44,6 +49,7 @@ public class Enemy : MonoBehaviour
         {
             shooter.Shoot(playerDirection, "Player");
         }
+        /*
         if (distance < minDistance - 0.05)
         {
             playerDirection = -playerDirection;
@@ -53,7 +59,8 @@ public class Enemy : MonoBehaviour
             playerDirection = Vector3.zero;
         }
         characterController.SimpleMove(playerDirection * speed);
- 
+        */
+        agent.destination = player.position;
     }
 
     private void OnDestroy()
