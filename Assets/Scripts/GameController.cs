@@ -17,6 +17,12 @@ public class GameController : MonoBehaviour
     public float currentTime;
     public int killCount=0;
 
+    private static GameController instance = null;
+
+    public static GameController GetInstance()
+    {
+        return instance;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,5 +46,17 @@ public class GameController : MonoBehaviour
         if(currentTime-startTime >= timeLimit){
             gameManager.GetComponent<Startup>().LoadNextLevel();
         }
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("MORE THAN ONE INSTANCE OF GAME MANAGER AAAAAAAAAAAAAA");
+        }
+
     }
 }

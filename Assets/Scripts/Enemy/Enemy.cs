@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private EnemyManager enemyManager;
     private CharacterController characterController;
+    private Shooter shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         player = enemyManager.GetPlayerTransform();
+        shooter = GetComponent<Shooter>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,9 @@ public class Enemy : MonoBehaviour
     {
         Vector3 playerDirection = (player.position - transform.position).normalized;
         characterController.SimpleMove(playerDirection * speed);
+        transform.LookAt(player.position);
+        shooter.Shoot(playerDirection, "Player");
+ 
     }
 
     private void OnDestroy()
