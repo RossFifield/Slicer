@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Bullet
+  - Terrain
   layers:
   - Default
   - TransparentFX
