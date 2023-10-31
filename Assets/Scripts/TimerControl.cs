@@ -13,7 +13,7 @@ public class TimerControl : MonoBehaviour
     void Start()
     {
         text = GetComponent<TMP_Text>();
-        sceneControl = sceneController.GetComponent<GameController>();
+        sceneControl = GameController.GetInstance();
     }
 
     // Update is called once per frame
