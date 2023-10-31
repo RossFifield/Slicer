@@ -41,5 +41,9 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (other.transform.root.CompareTag("Terrain"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
