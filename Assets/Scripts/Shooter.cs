@@ -13,6 +13,9 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private float shootCoolDown;
 
+    [SerializeField]
+    private float inaccuracy;
+
     private float timeSinceLastShot;
     private bool shootable = false;
 
@@ -43,6 +46,11 @@ public class Shooter : MonoBehaviour
             return;
         }
         Bullet newBullet = Instantiate(bulletPrefab, origin.position, Quaternion.identity).GetComponent<Bullet>();
+        float noiseX = direction.x + Random.Range(-inaccuracy, inaccuracy);
+        float noiseY = direction.y + Random.Range(-inaccuracy, inaccuracy);
+        float noiseZ = direction.z + Random.Range(-inaccuracy, inaccuracy);
+        direction = new Vector3(noiseX, noiseY, noiseZ);
+        direction.Normalize();
         newBullet.SetDirection(direction);
         newBullet.SetTarget(targetTag);
         audio.Play();
