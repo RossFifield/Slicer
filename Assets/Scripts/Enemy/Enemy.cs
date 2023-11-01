@@ -63,7 +63,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.position);
+        Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(lookPos);
         Vector3 playerDirection = player.position - transform.position;
         float distance = playerDirection.magnitude;
         playerDirection.Normalize();
