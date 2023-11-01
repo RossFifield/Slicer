@@ -730,7 +730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990857907201823487, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8716082719517450373, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -943,7 +943,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 3
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -1358,7 +1358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 86.2, y: -12.8}
+  m_AnchoredPosition: {x: 86.20001, y: -12.799988}
   m_SizeDelta: {x: 172.3195, y: 25.747}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1051588045
@@ -2044,6 +2044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clone
       objectReference: {fileID: 0}
+    - target: {fileID: 2230741770954953247, guid: c3bcf4dcd3a46b14893aec690b5260af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3bcf4dcd3a46b14893aec690b5260af, type: 3}
 --- !u!1001 &3792080015597535988
@@ -2100,6 +2104,10 @@ PrefabInstance:
     - target: {fileID: 3792080015399642552, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792080015399642554, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
+      propertyPath: health
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7537505308595677467, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalScale.z
