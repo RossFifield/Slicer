@@ -10,10 +10,18 @@ public class EnemyManager : MonoBehaviour
     private HashSet<Enemy> enemySet;
     [SerializeField]
     private int enemyCount = 0;
+
+    [SerializeField]
+    private int enemyLimit = 6;
+
     [SerializeField]
     public int killCount = 0;
 
     private static EnemyManager instance = null;
+
+    public int getEnemyCount(){
+        return enemyCount;
+    }
     public static EnemyManager GetInstance()
     {
         return instance;
@@ -32,6 +40,7 @@ public class EnemyManager : MonoBehaviour
             return;
         }
         enemySet.Add(enemy);
+        enemyCount = enemySet.Count;
 
     }
 
