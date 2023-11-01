@@ -179,13 +179,11 @@ public class Lighsaber : MonoBehaviour
         _anim.SetTrigger("Cut");
          //play slicing sound
          AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_swing_1",gameObject.transform);
-        GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);
         
     }
     double RandomizeCut(Vector3 camPos){
-        //TODO debug why the fuk is not working :(
         Vector3 randomizedDirection = (new Vector3(Random.Range(0f,2f)-1,Random.Range(0f,2f)-1,0)).normalized;
         Vector3 targetPoint = camPos + randomizedDirection;
         _planeNormal = targetPoint;
