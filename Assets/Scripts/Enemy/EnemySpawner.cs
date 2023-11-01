@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -66,7 +67,22 @@ public class EnemySpawner : MonoBehaviour
                         }
                     }
                     else{
-                        Debug.Log("Oh no! player is looking at me");
+                        Vector3 direction = spawnPoint.transform.position - Camera.main.transform.position;
+                        int layerMask = 1<<0;
+                        bool rayResult = Physics.Raycast(Camera.main.transform.position,direction,direction.magnitude,layerMask,QueryTriggerInteraction.Ignore);
+                        if(rayResult){
+                            float distance = Vector3.Distance(spawnPoint.position,player.transform.position);
+                            if(distance >= spawningDistanceLimit){
+                                Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                            }
+                            else{
+                                Debug.Log("player is too close!");
+                            }
+                        }
+                        else{
+                            Debug.Log("Oh no! player is looking at me");
+                        }
+                        
                     }
                 }
                 
