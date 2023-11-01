@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             //damage taken
             health -=1;
-            Debug.Log("Bullet hit!");
+            //Debug.Log("Bullet hit!");
 
         }
     }
