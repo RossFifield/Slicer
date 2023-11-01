@@ -51,6 +51,7 @@ public class Lighsaber : MonoBehaviour
     private Vector3 _triggerEnterTipPosition;
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
+    private double cutAngle=0;
 
     private Vector3 _planeNormal;
     private Vector3 _planePoint;
@@ -102,20 +103,18 @@ public class Lighsaber : MonoBehaviour
     {
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
-        Sliceable sliced = other.GetComponent<Sliceable>();
-        Debug.Log("is this slicable? "+ (sliced != null));
-        Debug.Log("is this slashing? "+_anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash"));
-        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
-            Debug.Log("I Entered something!");
-            CutSomething(other);
-        }   
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
         
         _triggerExitTipPosition = _tip.transform.position;
-            
+        Sliceable sliced = other.GetComponent<Sliceable>();
+        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
+            Debug.Log("I Entered something!");
+            CutSomething(other);
+        }   
     }
 
     void CutSomething(Collider other){
@@ -128,10 +127,10 @@ public class Lighsaber : MonoBehaviour
         Vector3 normal = Vector3.Cross(side1, side2).normalized;
 
         //Transform the normal so that it is aligned with the object we are slicing's transform.
-        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * _planeNormal)).normalized;
+        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
 
         //Get the enter position relative to the object we're cutting's local transform
-        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_planePoint);
+        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
 
         Plane plane = new Plane();
 
@@ -166,19 +165,24 @@ public class Lighsaber : MonoBehaviour
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 
+    public void ResetPositionAfterAnimation(){
+        _meshCollider.enabled = false;
+        gameObject.transform.parent.transform.Rotate(0,0,(float)(-cutAngle));
+        
+    }
+
     IEnumerator SwordSwing2(Vector3 camPos)
     {
         _meshCollider.enabled = true;
         //do normal randomization magic
-        double angle=RandomizeCut(camPos);
+        cutAngle=RandomizeCut(camPos);
         _anim.SetTrigger("Cut");
          //play slicing sound
          AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_swing_1",gameObject.transform);
         GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);
-        gameObject.transform.parent.transform.Rotate(0,0,(float)(-angle));
-        _meshCollider.enabled = false;
+        
     }
     double RandomizeCut(Vector3 camPos){
         //TODO debug why the fuk is not working :(
