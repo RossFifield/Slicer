@@ -172,6 +172,7 @@ public class Lighsaber : MonoBehaviour
         double angle=RandomizeCut(camPos);
         _anim.SetTrigger("Cut");
          //play slicing sound
+         AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_swing_1",gameObject.transform);
         GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);

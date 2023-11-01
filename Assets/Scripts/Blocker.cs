@@ -22,7 +22,7 @@ public class Blocker : MonoBehaviour
             Destroy(other.gameObject);
             Debug.Log("bullet blocked");
             //Play blocking sound
-            GetComponent<AudioSource>().Play();
+            AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_deflection",gameObject.transform);
         }
     }
 }
