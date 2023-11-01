@@ -262,25 +262,25 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<align=center>BETRAYAL!</align>
 
-    
 
-    The galactic senate has voted
-    to become an empire and installed acclaimed CHANCELLOR PALAPTINE as SUPREME EMPEROR!
 
-    
+    The galactic senate has voted to
+    become an empire and installed acclaimed CHANCELLOR PALAPTINE as SUPREME EMPEROR!
+
+
 
     Galactic
     Jedi transponders across the galaxy have become silent, one by one. State intelligence
     reports indictate that institutions such as the Jedi have been deemed hostile
     to the EMPIRE and galactic forces are now en route to the JEDI TEMPLE.
 
-    
+
 
     The
     few remaining JEDI at the JEDI TEMPLE have been tasked with protecting the withdrawal
     of JEDI into THE PATH.
 
-    
+
 
     PROTECT. PRESERVE. DEFEND.'
   m_isRightToLeft: 0
@@ -734,7 +734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235010, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_RenderMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235010, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_SortingOrder
@@ -745,36 +745,40 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235021, guid: dc7cab949223d5644881c294453fa625, type: 3}
-      propertyPath: m_PresetInfoIsWorld
+      propertyPath: m_UiScaleMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486918807376235021, guid: dc7cab949223d5644881c294453fa625, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 584.6666
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 278.66666
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalPosition.z
@@ -782,15 +786,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2486918807376235023, guid: dc7cab949223d5644881c294453fa625, type: 3}
       propertyPath: m_AnchoredPosition.x
