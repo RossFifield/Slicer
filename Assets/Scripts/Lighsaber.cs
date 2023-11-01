@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Lighsaber : MonoBehaviour
@@ -68,9 +69,10 @@ public class Lighsaber : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            StartCoroutine(SwordSwing2());
+            Vector3 camPos = Camera.main.transform.position;
+            StartCoroutine(SwordSwing2(camPos));
         }
         //Blocking or not
         if(Input.GetMouseButtonDown(1)){
@@ -81,6 +83,8 @@ public class Lighsaber : MonoBehaviour
             _anim.SetBool("Blocking",false);
             shield.enabled=false;
         }
+
+        
     }
     
     void LateUpdate()
@@ -99,9 +103,11 @@ public class Lighsaber : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        
         _triggerExitTipPosition = _tip.transform.position;
         Sliceable sliced = other.GetComponent<Sliceable>();
-        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSwing")){
+        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash")){
+            Debug.Log("I left something!");
             CutSomething(other);
         }       
     }
@@ -147,8 +153,6 @@ public class Lighsaber : MonoBehaviour
         }
         Destroy(other.gameObject);
        
-
-
         //slices[0].GetComponent<MeshFilter>().mesh.RecalculateUVDistributionMetrics();
         //slices[0].GetComponent<MeshFilter>().mesh.RecalculateNormals();
         slices[0].GetComponent<MeshFilter>().mesh.Optimize();
@@ -156,21 +160,33 @@ public class Lighsaber : MonoBehaviour
         //slices[1].GetComponent<MeshFilter>().mesh.RecalculateNormals();
         slices[1].GetComponent<MeshFilter>().mesh.Optimize();
 
-
-
         Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
         Vector3 newNormal = transformedNormal + Vector3.up * _forceAppliedToCut;
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 
-    IEnumerator SwordSwing2()
+    IEnumerator SwordSwing2(Vector3 camPos)
     {
         _meshCollider.enabled = true;
+        //do normal randomization magic
+        double angle=RandomizeCut(camPos);
         _anim.SetTrigger("Cut");
          //play slicing sound
+         AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_swing_1",gameObject.transform);
         GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);
+        gameObject.transform.parent.transform.Rotate(0,0,(float)(-angle));
         _meshCollider.enabled = false;
+    }
+    double RandomizeCut(Vector3 camPos){
+        //TODO debug why the fuk is not working :(
+        Vector3 randomizedDirection = (new Vector3(Random.Range(0,2)-1,Random.Range(0,2)-1,0)).normalized;
+        Vector3 targetPoint = camPos + randomizedDirection;
+        float xDiff = targetPoint.x - camPos.x;
+        float yDiff = targetPoint.y - camPos.y;
+        double a = System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
+        gameObject.transform.parent.Rotate(0,0,(float)a);
+        return a;
     }
 }
