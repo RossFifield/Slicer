@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
         if (distance < maxDistance)
         {
             shooter.Shoot(playerDirection, "Player");
-            handleAnimation();
+            //handleAnimation();
         }
         /*
         if (distance < minDistance - 0.05)

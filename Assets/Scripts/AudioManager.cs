@@ -47,8 +47,6 @@ public class AudioManager : MonoBehaviour
                 currentAudio[soundpath] = currentAudio[soundpath] + 1;
 
                 AudioClip clip = Resources.Load(soundpath) as AudioClip;
-                Debug.Log("Trying to load this audio: "+soundpath);
-                Debug.Log(clip);
                 audioPlayer.clip =clip;
                 AudioSource.PlayClipAtPoint(clip,position.position);
                 StartCoroutine(SoundEndIn(clip.length, soundpath));
@@ -61,8 +59,6 @@ public class AudioManager : MonoBehaviour
             currentAudio.Add(soundpath,1);
             AudioClip clip = Resources.Load(soundpath) as AudioClip;
             audioPlayer.clip =clip;
-            Debug.Log("Trying to load this audio: "+soundpath);
-            Debug.Log(clip);
             AudioSource.PlayClipAtPoint(clip,position.position);
             StartCoroutine(SoundEndIn(clip.length, soundpath));
         }

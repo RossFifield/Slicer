@@ -52,6 +52,9 @@ public class Lighsaber : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private Vector3 _planeNormal;
+    private Vector3 _planePoint;
+
     void Start()
     {
         // get variables
@@ -99,17 +102,20 @@ public class Lighsaber : MonoBehaviour
     {
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
+        Sliceable sliced = other.GetComponent<Sliceable>();
+        Debug.Log("is this slicable? "+ (sliced != null));
+        Debug.Log("is this slashing? "+_anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash"));
+        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
+            Debug.Log("I Entered something!");
+            CutSomething(other);
+        }   
     }
 
     private void OnTriggerExit(Collider other)
     {
         
         _triggerExitTipPosition = _tip.transform.position;
-        Sliceable sliced = other.GetComponent<Sliceable>();
-        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash")){
-            Debug.Log("I left something!");
-            CutSomething(other);
-        }       
+            
     }
 
     void CutSomething(Collider other){
@@ -117,20 +123,15 @@ public class Lighsaber : MonoBehaviour
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
 
-        Vector3[] triangle = new Vector3[3];
-        triangle[0] = _triggerEnterTipPosition;
-        triangle[1] = _triggerEnterBasePosition;
-        triangle[2] = _triggerExitTipPosition;
-
         //Get the point perpendicular to the triangle above which is the normal
         //https://docs.unity3d.com/Manual/ComputingNormalPerpendicularVector.html
         Vector3 normal = Vector3.Cross(side1, side2).normalized;
 
         //Transform the normal so that it is aligned with the object we are slicing's transform.
-        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
+        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * _planeNormal)).normalized;
 
         //Get the enter position relative to the object we're cutting's local transform
-        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
+        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_planePoint);
 
         Plane plane = new Plane();
 
@@ -146,7 +147,7 @@ public class Lighsaber : MonoBehaviour
             plane = plane.flipped;
         }
 
-        GameObject[] slices = Slicer.Slice(plane, other.gameObject,triangle);
+        GameObject[] slices = Slicer.Slice(plane, other.gameObject);
         if (slices == null)
         {
             return;
@@ -183,6 +184,8 @@ public class Lighsaber : MonoBehaviour
         //TODO debug why the fuk is not working :(
         Vector3 randomizedDirection = (new Vector3(Random.Range(0,2)-1,Random.Range(0,2)-1,0)).normalized;
         Vector3 targetPoint = camPos + randomizedDirection;
+        _planeNormal = targetPoint;
+        _planePoint = camPos;
         float xDiff = targetPoint.x - camPos.x;
         float yDiff = targetPoint.y - camPos.y;
         double a = System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
