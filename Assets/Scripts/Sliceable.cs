@@ -101,21 +101,18 @@ public class Sliceable : MonoBehaviour
             _originalVolume = value;
         }
     }
-    */
     void Start()
     {
-        Mesh mesh = this.GetComponent<MeshFilter>().mesh;
-        /*
+        Mesh mesh = GetComponent<MeshFilter>()?.mesh;
         float thisVolume = VolumeOfMesh(mesh);
 
         if (thisVolume <= _originalVolume * _destroyThreshold)
         {
             Destroy(this.gameObject);
         }
-        */
+        
         // self destroy if too small
     }
-    /*
     public float SignedVolumeOfTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
     {
         float v321 = p3.x * p2.y * p1.z;
