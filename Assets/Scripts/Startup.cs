@@ -79,6 +79,9 @@ public class Startup : MonoBehaviour
         enumValue++;
         LoadCurrentScene((EGamestates)enumValue);
         Debug.Log(enumValue);
+
+        
+        
     }
 
     public EGamestates GetCurrentLevel()
