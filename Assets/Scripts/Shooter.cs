@@ -19,11 +19,13 @@ public class Shooter : MonoBehaviour
     private float timeSinceLastShot;
     private bool shootable = false;
 
-    private AudioSource audio;
+    private string soundPath = "Sounds/Guns/Blaster_1";
+
+    private AudioSource audioPlayer;
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -53,7 +55,7 @@ public class Shooter : MonoBehaviour
         direction.Normalize();
         newBullet.SetDirection(direction);
         newBullet.SetTarget(targetTag);
-        audio.Play();
+        AudioManager.GetInstance().PlaySoundEffect(soundPath,this.transform);
         timeSinceLastShot = 0;
         shootable = false;
     }
