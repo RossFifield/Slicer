@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     private CharacterController characterController;
     private Shooter shooter;
     private NavMeshAgent agent;
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +36,30 @@ public class Enemy : MonoBehaviour
         player = enemyManager.GetPlayerTransform();
         shooter = GetComponent<Shooter>();
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
 
         agent.stoppingDistance = minDistance;
     }
 
+    void handleAnimation()
+    {
+        bool isRetreating = animator.GetBool("isRetreating");
+        bool isIdle = animator.GetBool("isStill");
+        bool isAdvancing = animator.GetBool("isAdvancing")
+
+        if (isIdle)
+        {
+            animator.SetBool("isStill", true);
+        }
+        else if (isRetreating)
+        {
+            animator.SetBool("isRetreating", true);
+        }
+        else if (isAdvancing)
+        {
+            animator.SetBool("isAdvancing", true);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -48,6 +70,7 @@ public class Enemy : MonoBehaviour
         if (distance < maxDistance)
         {
             shooter.Shoot(playerDirection, "Player");
+            handleAnimation();
         }
         /*
         if (distance < minDistance - 0.05)
