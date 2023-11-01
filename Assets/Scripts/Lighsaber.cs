@@ -51,6 +51,10 @@ public class Lighsaber : MonoBehaviour
     private Vector3 _triggerEnterTipPosition;
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
+    private double cutAngle=0;
+
+    private Vector3 _planeNormal;
+    private Vector3 _planePoint;
 
     void Start()
     {
@@ -99,6 +103,7 @@ public class Lighsaber : MonoBehaviour
     {
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -106,21 +111,16 @@ public class Lighsaber : MonoBehaviour
         
         _triggerExitTipPosition = _tip.transform.position;
         Sliceable sliced = other.GetComponent<Sliceable>();
-        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash")){
-            Debug.Log("I left something!");
+        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
+            Debug.Log("I Entered something!");
             CutSomething(other);
-        }       
+        }   
     }
 
     void CutSomething(Collider other){
         //Create a triangle between the tip and base so that we can get the normal
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
-
-        Vector3[] triangle = new Vector3[3];
-        triangle[0] = _triggerEnterTipPosition;
-        triangle[1] = _triggerEnterBasePosition;
-        triangle[2] = _triggerExitTipPosition;
 
         //Get the point perpendicular to the triangle above which is the normal
         //https://docs.unity3d.com/Manual/ComputingNormalPerpendicularVector.html
@@ -146,7 +146,7 @@ public class Lighsaber : MonoBehaviour
             plane = plane.flipped;
         }
 
-        GameObject[] slices = Slicer.Slice(plane, other.gameObject,triangle);
+        GameObject[] slices = Slicer.Slice(plane, other.gameObject);
         if (slices == null)
         {
             return;
@@ -165,24 +165,31 @@ public class Lighsaber : MonoBehaviour
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 
+    public void ResetPositionAfterAnimation(){
+        _meshCollider.enabled = false;
+        gameObject.transform.parent.transform.Rotate(0,0,(float)(-cutAngle));
+        
+    }
+
     IEnumerator SwordSwing2(Vector3 camPos)
     {
         _meshCollider.enabled = true;
         //do normal randomization magic
-        double angle=RandomizeCut(camPos);
+        cutAngle=RandomizeCut(camPos);
         _anim.SetTrigger("Cut");
          //play slicing sound
          AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_swing_1",gameObject.transform);
         GetComponent<AudioSource>().Play();
         //wait to finish animation
         yield return new WaitForSeconds(1.0f);
-        gameObject.transform.parent.transform.Rotate(0,0,(float)(-angle));
-        _meshCollider.enabled = false;
+        
     }
     double RandomizeCut(Vector3 camPos){
         //TODO debug why the fuk is not working :(
         Vector3 randomizedDirection = (new Vector3(Random.Range(0,2)-1,Random.Range(0,2)-1,0)).normalized;
         Vector3 targetPoint = camPos + randomizedDirection;
+        _planeNormal = targetPoint;
+        _planePoint = camPos;
         float xDiff = targetPoint.x - camPos.x;
         float yDiff = targetPoint.y - camPos.y;
         double a = System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
