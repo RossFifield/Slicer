@@ -14,25 +14,25 @@ public class Startup : MonoBehaviour
     public static Startup instance;
     public int levelNum = 0;// set the level number here
     public EGamestates e_gamestate = EGamestates.LobbyScene;   // for setting the initial game state
-
-
+    
 
     private void Awake()
     {
 
         Init();
+        
     }
 
     void Start()
     {
-
+        DontDestroyOnLoad(transform.gameObject);
     }
 
 
     void Init() //sets up the game and runs the menu
     {
-    
 
+        
         //e_gamestate = EGamestates.MENU;
         //LoadCurrentScene(e_gamestate);
     }
