@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.CompareTag("Bullet")){
             Destroy(other.gameObject);
-            Debug.Log("Bullet hit!");
+            //Debug.Log("Bullet hit!");
 
         }
     }

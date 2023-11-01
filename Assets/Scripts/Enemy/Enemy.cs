@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     {
         bool isRetreating = animator.GetBool("isRetreating");
         bool isIdle = animator.GetBool("isStill");
-        bool isAdvancing = animator.GetBool("isAdvancing")
+        bool isAdvancing = animator.GetBool("isAdvancing");
 
         if (isIdle)
         {
