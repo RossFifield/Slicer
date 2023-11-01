@@ -111,7 +111,7 @@ namespace Assets.Scripts
             sliceable.IsSolid = originalSliceable.IsSolid;
             sliceable.ReverseWireTriangles = originalSliceable.ReverseWireTriangles;
             sliceable.UseGravity = originalSliceable.UseGravity;
-            sliceable.OriginalVolume = originalVolume;
+            //sliceable.OriginalVolume = originalVolume;
 
             meshGameObject.GetComponent<MeshRenderer>().materials = originalMaterial;
 

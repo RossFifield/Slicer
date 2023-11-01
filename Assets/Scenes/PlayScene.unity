@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -471,8 +471,6 @@ MonoBehaviour:
   _useGravity: 1
   _shareVertices: 0
   _smoothVertices: 0
-  _destroyThreshold: 0.05
-  _originalVolume: 0
 --- !u!64 &372851621
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -868,8 +866,6 @@ MonoBehaviour:
   _useGravity: 1
   _shareVertices: 0
   _smoothVertices: 0
-  _destroyThreshold: 0.05
-  _originalVolume: 0
 --- !u!64 &945072318
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1334,8 +1330,6 @@ MonoBehaviour:
   _useGravity: 1
   _shareVertices: 0
   _smoothVertices: 0
-  _destroyThreshold: 0.05
-  _originalVolume: 0
 --- !u!64 &1007629603
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2020,6 +2014,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1311750372696719388, guid: c3bcf4dcd3a46b14893aec690b5260af, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1566970640254437541, guid: c3bcf4dcd3a46b14893aec690b5260af, type: 3}
       propertyPath: m_RootOrder
       value: 1
