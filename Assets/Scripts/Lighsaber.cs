@@ -41,7 +41,7 @@ public class Lighsaber : MonoBehaviour
     public Collider shield;
 
     private Mesh _mesh;
-    private MeshCollider _meshCollider;
+    private BoxCollider _meshCollider;
     private Animator _anim;
     private Vector3[] _vertices;
     private int[] _triangles;
@@ -59,7 +59,7 @@ public class Lighsaber : MonoBehaviour
     void Start()
     {
         // get variables
-        _meshCollider = GetComponentInChildren<MeshCollider>();
+        _meshCollider = GetComponentInChildren<BoxCollider>();
         _anim = GetComponentInChildren<Animator>();
 
         //start with collider disabled
@@ -167,7 +167,7 @@ public class Lighsaber : MonoBehaviour
 
     public void ResetPositionAfterAnimation(){
         _meshCollider.enabled = false;
-        gameObject.transform.parent.transform.Rotate(0,0,(float)(-cutAngle));
+        gameObject.transform.parent.transform.localRotation = Quaternion.identity;
         
     }
 
@@ -186,7 +186,7 @@ public class Lighsaber : MonoBehaviour
     }
     double RandomizeCut(Vector3 camPos){
         //TODO debug why the fuk is not working :(
-        Vector3 randomizedDirection = (new Vector3(Random.Range(0,2)-1,Random.Range(0,2)-1,0)).normalized;
+        Vector3 randomizedDirection = (new Vector3(Random.Range(0f,2f)-1,Random.Range(0f,2f)-1,0)).normalized;
         Vector3 targetPoint = camPos + randomizedDirection;
         _planeNormal = targetPoint;
         _planePoint = camPos;
