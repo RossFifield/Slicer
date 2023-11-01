@@ -16,7 +16,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         /// 
         //private static float cutThreshold = 0.3f;
-        public static GameObject[] Slice(Plane plane, GameObject objectToCut, Vector3[] triangle)
+        public static GameObject[] Slice(Plane plane, GameObject objectToCut)
         {            
             //Get the current mesh and its verts and tris
             Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
