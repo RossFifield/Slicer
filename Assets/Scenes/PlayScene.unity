@@ -1782,11 +1782,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 586660301595255184, guid: a0d236ff9b510e4499e782887ac8aa29, type: 3}
+    - target: {fileID: 0}
       propertyPath: character
       value: 
       objectReference: {fileID: 340551495}
-    - target: {fileID: 586660301595255184, guid: a0d236ff9b510e4499e782887ac8aa29, type: 3}
+    - target: {fileID: 0}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 0}
@@ -1838,8 +1838,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 586660301595255184, guid: a0d236ff9b510e4499e782887ac8aa29, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d236ff9b510e4499e782887ac8aa29, type: 3}
 --- !u!4 &1591685800 stripped
 Transform:
@@ -2107,7 +2106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792080015399642554, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: health
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7537505308595677467, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalScale.z
