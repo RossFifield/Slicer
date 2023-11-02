@@ -20,7 +20,6 @@ public class Blocker : MonoBehaviour
     {
         if(other.CompareTag("Bullet")){
             Destroy(other.gameObject);
-            Debug.Log("bullet blocked");
             //Play blocking sound
             AudioManager.GetInstance().PlaySoundEffect("Sounds/Lightsaber/Lightsaber_deflection",gameObject.transform);
         }

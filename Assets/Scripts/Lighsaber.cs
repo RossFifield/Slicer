@@ -112,7 +112,6 @@ public class Lighsaber : MonoBehaviour
         _triggerExitTipPosition = _tip.transform.position;
         Sliceable sliced = other.GetComponent<Sliceable>();
         if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
-            Debug.Log("I Entered something!");
             CutSomething(other);
         }   
     }
