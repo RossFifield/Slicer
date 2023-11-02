@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
 
     public void Add(Enemy enemy)
     {
-        if (enemyCount >= 5)
+        if (enemyCount >= enemyLimit)
         {
             Destroy(enemy.gameObject);
             return;
