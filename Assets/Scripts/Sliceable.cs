@@ -89,6 +89,11 @@ public class Sliceable : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        
+    }
+
     /*
     public float OriginalVolume
     {
