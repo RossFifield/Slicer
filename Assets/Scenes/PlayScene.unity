@@ -2771,6 +2771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: republic-laat-gunship
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 773dcf42e73228743bdf249da3ae5ca2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746654310787607633, guid: 773dcf42e73228743bdf249da3ae5ca2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3208,7 +3212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1192536025295365047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3504,6 +3508,7 @@ PrefabInstance:
     - {fileID: 1697247546, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
     - {fileID: 5693140748729198940, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
     - {fileID: 187079143, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
+    - {fileID: 3792080015399642557, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
 --- !u!114 &5921213084715457834
 MonoBehaviour:
@@ -3574,7 +3579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8218054568235411389
 MeshRenderer:
   m_ObjectHideFlags: 0
