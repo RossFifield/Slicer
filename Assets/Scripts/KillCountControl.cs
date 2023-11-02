@@ -17,6 +17,6 @@ public class KillCountControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Kills: " + ((int)enemyManager.killCount).ToString();
+        text.text = "Kills: " + ((int)enemyManager.killCount).ToString()+"/"+EnemySpawner.GetInstance().GetTotalEnemies();
     }
 }

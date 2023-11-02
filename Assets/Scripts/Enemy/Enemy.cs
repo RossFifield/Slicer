@@ -86,6 +86,10 @@ public class Enemy : MonoBehaviour
         */
         agent.destination = player.position;
     }
+    // void LateUpdate()
+    // {
+    //     Debug.Log("Im going to this position: "+agent.destination.ToString());
+    // }
 
     private void OnDestroy()
     {

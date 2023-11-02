@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public float timeLimit=300;
-    public int killCountTarget= 30;
+    private int killCountTarget= 30;
     public GameObject character;
     public GameObject gameManager;    
-
     private float startTime;
 
     [HideInInspector]
@@ -18,6 +17,8 @@ public class GameController : MonoBehaviour
     public int killCount=0;
 
     private static GameController instance = null;
+    private PlayerController player;
+    public int currentHP;
 
     public static GameController GetInstance()
     {
@@ -28,18 +29,21 @@ public class GameController : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        killCountTarget = EnemySpawner.GetInstance().GetTotalEnemies();
+        player = character.GetComponent<PlayerController>();
+        currentHP = player.health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime = Time.time;
+        currentTime = Time.time- startTime;
         // end game when kill count reaches target
         if(killCount >= killCountTarget){
             gameManager.GetComponent<Startup>().LoadNextLevel();
         }
         // end game when character health = 0
-        if(character.GetComponent<PlayerController>().health<=0){
+        if(player.health<=0){
             gameManager.GetComponent<Startup>().LoadNextLevel();
         }
         // end the game when time is up
