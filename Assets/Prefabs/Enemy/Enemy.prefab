@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   minDistance: 10
-  maxDistance: 30
+  maxDistance: 60
 --- !u!114 &882702158461065755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
     insideMaterial: {fileID: 2100000, guid: d54acceabd6afc04fb541691ac1b3469, type: 2}
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
-    invokeCallbacks: 0
+    invokeCallbacks: 1
   callbackOptions:
     onFracture:
       m_PersistentCalls:

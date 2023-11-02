@@ -29,11 +29,15 @@ public class Lighsaber : MonoBehaviour
     // [Tooltip("The number of frame that the trail should be rendered for")]
     // private int _trailFrameLength = 3;
 
+    /*
     [SerializeField]
     [ColorUsage(true, true)]
     [Tooltip("The colour of the blade and trail")]
     private Color _colour = Color.red;
+    */
 
+    [SerializeField]
+    private GameObject explosionTemplate;
     [SerializeField]
     [Tooltip("The amount of force applied to each side of a slice")]
     private float _forceAppliedToCut = 3f;
@@ -75,9 +79,7 @@ public class Lighsaber : MonoBehaviour
         if(Input.GetMouseButtonUp(1)){
             _anim.SetBool("Blocking",false);
             shield.enabled=false;
-        }
-
-        
+        } 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -118,7 +120,6 @@ public class Lighsaber : MonoBehaviour
             newMeshFilter.mesh = new Mesh();
             newMeshFilter.mesh = bakedMesh;
         }
-        Debug.Log("MESH FILTERRRRR");
         //Create a triangle between the tip and base so that we can get the normal
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
@@ -136,7 +137,9 @@ public class Lighsaber : MonoBehaviour
         Slice sliced = other.GetComponent<Slice>();
         if (sliced != null)
         {
+            sliced.callbackOptions.onCompleted.AddListener(SpawnExplosion);
             sliced.ComputeSlice(normal, _triggerExitTipPosition);
+            //SpawnExplosion();
         }
         StartCoroutine(DelayedDetroy(other.gameObject));
 
@@ -207,5 +210,11 @@ public class Lighsaber : MonoBehaviour
         double a = System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
         gameObject.transform.parent.Rotate(0,0,(float)a);
         return a;
+    }
+
+    void SpawnExplosion()
+    {
+        Explosion explosion = Instantiate(explosionTemplate, _triggerEnterBasePosition, Quaternion.identity).GetComponent<Explosion>();
+        explosion.SetForce(_forceAppliedToCut);
     }
 }
