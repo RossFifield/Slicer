@@ -51,9 +51,6 @@ public class AudioManager : MonoBehaviour
                 AudioSource.PlayClipAtPoint(clip,position.position);
                 StartCoroutine(SoundEndIn(clip.length, soundpath));
             }
-            else{
-                //Debug.Log("Too many soundz");
-            }
         }
         else{
             currentAudio.Add(soundpath,1);
