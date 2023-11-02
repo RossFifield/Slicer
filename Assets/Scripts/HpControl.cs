@@ -14,6 +14,7 @@ public class HpControl : MonoBehaviour
     {
         playerControl = player.GetComponent<PlayerController>();
         slide = GetComponent<Slider>();
+        slide.maxValue = GameController.GetInstance().currentHP;
     }
 
     // Update is called once per frame

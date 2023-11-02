@@ -1391,6 +1391,7 @@ MonoBehaviour:
   gameManager: {fileID: 819799191}
   currentTime: 0
   killCount: 0
+  currentHP: 0
 --- !u!4 &560588732
 Transform:
   m_ObjectHideFlags: 0
@@ -2736,7 +2737,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 3
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -6013,7 +6014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792080015399642554, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: health
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7537505308595677467, guid: 62a1a5f9e48404544acc9b3569d4c8eb, type: 3}
       propertyPath: m_LocalScale.z
