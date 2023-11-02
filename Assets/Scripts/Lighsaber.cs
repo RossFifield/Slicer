@@ -40,14 +40,9 @@ public class Lighsaber : MonoBehaviour
 
     public Collider shield;
 
-    private Mesh _mesh;
+
     private BoxCollider _meshCollider;
     private Animator _anim;
-    private Vector3[] _vertices;
-    private int[] _triangles;
-    private int _frameCount;
-    private Vector3 _previousTipPosition;
-    private Vector3 _previousBasePosition;
     private Vector3 _triggerEnterTipPosition;
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
@@ -63,13 +58,7 @@ public class Lighsaber : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
 
         //start with collider disabled
-        _meshCollider.enabled = false;
-        
-
-        //Set starting position for tip and base
-        _previousTipPosition = _tip.transform.position;
-        _previousBasePosition = _base.transform.position;
-        
+        _meshCollider.enabled = false;     
     }
     void Update()
     {
@@ -89,14 +78,6 @@ public class Lighsaber : MonoBehaviour
         }
 
         
-    }
-    
-    void LateUpdate()
-    {
-             //Track the previous base and tip positions for the next frame
-        _previousTipPosition = _tip.transform.position;
-        _previousBasePosition = _base.transform.position;
-        //_frameCount += NUM_VERTICES;
     }
 
     private void OnTriggerEnter(Collider other)
