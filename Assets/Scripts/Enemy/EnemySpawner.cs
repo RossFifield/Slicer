@@ -41,6 +41,14 @@ public class EnemySpawner : MonoBehaviour
         return spawnPoints.Count;
     }
 
+    public int GetTotalEnemies(){
+        int sum =0;
+        foreach(int i in spawnLimits){
+            sum+=i;
+        }
+        return sum;
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -88,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
                 }
                 else{                   
                     if(!exhaustedSpawn.Contains(spawnPoint)){
-                        Debug.Log("Exhausted Spawn point: "+ spawnPoints.IndexOf(spawnPoint));
+                        //Debug.Log("Exhausted Spawn point: "+ spawnPoints.IndexOf(spawnPoint));
                         exhaustedSpawn.Add(spawnPoint);
                     }
                 }

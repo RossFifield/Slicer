@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public float timeLimit=300;
-    public int killCountTarget= 30;
+    private int killCountTarget= 30;
     public GameObject character;
     public GameObject gameManager;    
 
@@ -28,12 +28,13 @@ public class GameController : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        killCountTarget = EnemySpawner.GetInstance().GetTotalEnemies();
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime = Time.time;
+        currentTime = Time.time- startTime;
         // end game when kill count reaches target
         if(killCount >= killCountTarget){
             gameManager.GetComponent<Startup>().LoadNextLevel();
