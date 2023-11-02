@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 5513705982148930240}
   - component: {fileID: 5513705982148930241}
   - component: {fileID: 5513705982148930242}
-  - component: {fileID: 5513705982148930246}
   - component: {fileID: 3778833747714689464}
   - component: {fileID: 882702158461065755}
   - component: {fileID: 2210812987168724662}
@@ -174,23 +173,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5513705982148930246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513705982148930247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c045a382d939e4742b906758f923bbca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isSolid: 1
-  _reverseWindTriangles: 0
-  _useGravity: 1
-  _shareVertices: 0
-  _smoothVertices: 0
 --- !u!114 &3778833747714689464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +258,7 @@ MonoBehaviour:
     enableReslicing: 1
     maxResliceCount: 14
     detectFloatingFragments: 0
-    insideMaterial: {fileID: 0}
+    insideMaterial: {fileID: 2100000, guid: d54acceabd6afc04fb541691ac1b3469, type: 2}
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
     invokeCallbacks: 0
