@@ -23,7 +23,8 @@ public class Intromusic : MonoBehaviour
 
         if (scene.name == "PlayScene")
         {
-            Destroy(this);
+            Debug.Log("Im on play scene");
+            Destroy(this.gameObject);
         }
     }
 }
