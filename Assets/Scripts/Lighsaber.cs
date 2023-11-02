@@ -157,10 +157,7 @@ public class Lighsaber : MonoBehaviour
         {
             sliced.ComputeSlice(normal, _triggerExitTipPosition);
         }
-        else
-        {
-            StartCoroutine(DelayedDetroy(other.gameObject));
-        }
+        StartCoroutine(DelayedDetroy(other.gameObject));
 
         /*
         Plane plane = new Plane();
