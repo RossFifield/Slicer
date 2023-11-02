@@ -108,15 +108,36 @@ public class Lighsaber : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
         _triggerExitTipPosition = _tip.transform.position;
-        Sliceable sliced = other.GetComponent<Sliceable>();
-        if(sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
-            CutSomething(other);
+        //Sliceable sliced = other.GetComponent<Sliceable>();
+        Slice sliced = other.GetComponent<Slice>();
+        if (sliced != null && _anim.GetCurrentAnimatorStateInfo(0).IsName("SwordSlash") ){
+            CutSomething(other.gameObject);
         }   
     }
 
-    void CutSomething(Collider other){
+    void CutSomething(GameObject other){
+
+        foreach (Transform child in other.transform)
+        {
+            Debug.Log("child");
+            CutSomething(child.gameObject);
+        }
+        if (other.GetComponent<MeshFilter>() == null && other.GetComponent<SkinnedMeshRenderer>() == null)
+        {
+            Debug.Log("Destroyed " + other.gameObject.name);
+            Destroy(other.gameObject);
+            return;
+        }
+        if (other.GetComponent<SkinnedMeshRenderer>() != null)
+        {
+            MeshFilter newMeshFilter = other.AddComponent<MeshFilter>();
+            Mesh bakedMesh = new Mesh();
+            other.GetComponent<SkinnedMeshRenderer>().BakeMesh(bakedMesh);
+            newMeshFilter.mesh = new Mesh();
+            newMeshFilter.mesh = bakedMesh;
+        }
+        Debug.Log("MESH FILTERRRRR");
         //Create a triangle between the tip and base so that we can get the normal
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
@@ -126,11 +147,22 @@ public class Lighsaber : MonoBehaviour
         Vector3 normal = Vector3.Cross(side1, side2).normalized;
 
         //Transform the normal so that it is aligned with the object we are slicing's transform.
-        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
+        //Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
 
         //Get the enter position relative to the object we're cutting's local transform
-        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
+        //Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
 
+        Slice sliced = other.GetComponent<Slice>();
+        if (sliced != null)
+        {
+            sliced.ComputeSlice(normal, _triggerExitTipPosition);
+        }
+        else
+        {
+            StartCoroutine(DelayedDetroy(other.gameObject));
+        }
+
+        /*
         Plane plane = new Plane();
 
         plane.SetNormalAndPosition(
@@ -150,19 +182,24 @@ public class Lighsaber : MonoBehaviour
         {
             return;
         }
-        Destroy(other.gameObject);
-       
-        //slices[0].GetComponent<MeshFilter>().mesh.RecalculateUVDistributionMetrics();
-        //slices[0].GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        
         slices[0].GetComponent<MeshFilter>().mesh.Optimize();
-        //slices[1].GetComponent<MeshFilter>().mesh.RecalculateUVDistributionMetrics();
-        //slices[1].GetComponent<MeshFilter>().mesh.RecalculateNormals();
         slices[1].GetComponent<MeshFilter>().mesh.Optimize();
 
         Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
         Vector3 newNormal = transformedNormal + Vector3.up * _forceAppliedToCut;
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
+        */
     }
+
+    IEnumerator DelayedDetroy(GameObject obj)
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+        Destroy(obj);
+    }
+
 
     public void ResetPositionAfterAnimation(){
         _meshCollider.enabled = false;
