@@ -53,7 +53,7 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("CANT UNSUB SINCE ALREADY UNSUBBED");
+            //Debug.Log("CANT UNSUB SINCE ALREADY UNSUBBED");
         }
     }
 
