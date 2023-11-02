@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -638,10 +638,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 743149208287557572, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1550291155122476668, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785077438482569732, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1815733792581214253, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
@@ -658,19 +662,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051614627947829392, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.47
+      value: -46.32
       objectReference: {fileID: 0}
     - target: {fileID: 3051614627947829392, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 3051614627947829392, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -139.26
+      value: -86.53
       objectReference: {fileID: 0}
     - target: {fileID: 4162238778364258032, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 340551495}
+    - target: {fileID: 4162238778364258032, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4162238778364258032, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: spawnPoints.Array.data[1]
@@ -734,7 +742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716082719517450373, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.66
+      value: -60.7
       objectReference: {fileID: 0}
     - target: {fileID: 8716082719517450373, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -742,7 +750,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716082719517450373, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -122.22
+      value: -88.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128908637545822353, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35ad7bc1d3e7bb845a337823c507923f, type: 3}
@@ -1770,6 +1782,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8709646720048232128, guid: 6fd28dc1d3b3a5443a74edf3caf5653c, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9088124346371744027, guid: 6fd28dc1d3b3a5443a74edf3caf5653c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
@@ -2173,6 +2189,10 @@ PrefabInstance:
     - target: {fileID: 2984030075585579616, guid: eae18e89e9ce5bb4284e73ccef5e4bf9, type: 3}
       propertyPath: m_Name
       value: Clone_Trooper1k
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984030075585579616, guid: eae18e89e9ce5bb4284e73ccef5e4bf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae18e89e9ce5bb4284e73ccef5e4bf9, type: 3}
