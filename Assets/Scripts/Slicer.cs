@@ -90,7 +90,7 @@ namespace Assets.Scripts
             SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity);
 
             return new GameObject[] { positiveObject, negativeObject};
-        }        
+        }
 
         /// <summary>
         /// Creates the default mesh game object.
@@ -99,8 +99,19 @@ namespace Assets.Scripts
         /// <returns></returns>
         private static GameObject CreateMeshGameObject(GameObject originalObject, float originalVolume)
         {
-            var originalMaterial = originalObject.GetComponent<MeshRenderer>().materials;
-
+            Material[] originalMaterial;
+            bool isSkinnedMesh;
+            if (originalObject.GetComponent<MeshRenderer>() == null)
+            {
+                originalMaterial = originalObject.GetComponent<SkinnedMeshRenderer>().materials;
+                isSkinnedMesh = true;
+            }
+            else
+            {
+                originalMaterial = originalObject.GetComponent<MeshRenderer>().materials;
+                isSkinnedMesh = false;
+            }
+          
             GameObject meshGameObject = new GameObject();
             Sliceable originalSliceable = originalObject.GetComponent<Sliceable>();
 
