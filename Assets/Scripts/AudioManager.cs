@@ -41,22 +41,22 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void PlaySoundEffect(string soundpath, Transform position){
+    public void PlaySoundEffect(string soundpath, Transform position, float volume =1f){
         if(currentAudio.ContainsKey(soundpath)){
             if(currentAudio[soundpath]<maxAudio){
                 currentAudio[soundpath] = currentAudio[soundpath] + 1;
 
                 AudioClip clip = Resources.Load(soundpath) as AudioClip;
                 audioPlayer.clip =clip;
-                AudioSource.PlayClipAtPoint(clip,position.position);
+                AudioSource.PlayClipAtPoint(clip,position.position,volume);
                 StartCoroutine(SoundEndIn(clip.length, soundpath));
             }
         }
         else{
             currentAudio.Add(soundpath,1);
             AudioClip clip = Resources.Load(soundpath) as AudioClip;
-            audioPlayer.clip =clip;
-            AudioSource.PlayClipAtPoint(clip,position.position);
+            audioPlayer.clip = clip;
+            AudioSource.PlayClipAtPoint(clip,position.position,volume);
             StartCoroutine(SoundEndIn(clip.length, soundpath));
         }
     }

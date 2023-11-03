@@ -73,23 +73,9 @@ public class Enemy : MonoBehaviour
             shooter.Shoot(playerDirection, "Player");
             //handleAnimation();
         }
-        /*
-        if (distance < minDistance - 0.05)
-        {
-            playerDirection = -playerDirection;
-        }
-        else if (distance < minDistance + 0.01)
-        {
-            playerDirection = Vector3.zero;
-        }
-        characterController.SimpleMove(playerDirection * speed);
-        */
         agent.destination = player.position;
     }
-    // void LateUpdate()
-    // {
-    //     Debug.Log("Im going to this position: "+agent.destination.ToString());
-    // }
+
 
     private void OnDestroy()
     {
