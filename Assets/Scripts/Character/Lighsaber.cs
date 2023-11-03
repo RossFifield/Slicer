@@ -180,7 +180,10 @@ public class Lighsaber : MonoBehaviour
 
     void SpawnExplosion()
     {
-        Explosion explosion = Instantiate(explosionTemplate, _triggerEnterBasePosition, Quaternion.identity).GetComponent<Explosion>();
+        Vector3 midpoint = (_triggerEnterBasePosition + _triggerEnterTipPosition) / 2;
+        Explosion explosion = Instantiate(explosionTemplate, midpoint, Quaternion.identity).GetComponent<Explosion>();
         explosion.SetForce(_forceAppliedToCut);
+        explosion.SetCenterOfExplosion(_triggerEnterBasePosition);
+        explosion.SetColliderRadius((_triggerEnterBasePosition - _triggerEnterTipPosition).magnitude);
     }
 }
