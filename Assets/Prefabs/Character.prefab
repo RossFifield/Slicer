@@ -320,7 +320,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 45
   canMove: 1
-  health: 2147483647
+  health: 20
 --- !u!1 &4062604752313994875
 GameObject:
   m_ObjectHideFlags: 0
