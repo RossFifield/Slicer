@@ -8,8 +8,7 @@ public class GameController : MonoBehaviour
 {
     public float timeLimit=300;
     private int killCountTarget= 30;
-    public GameObject character;
-    public GameObject gameManager;    
+    public GameObject character;   
     private float startTime;
 
     [HideInInspector]
@@ -40,15 +39,15 @@ public class GameController : MonoBehaviour
         currentTime = Time.time- startTime;
         // end game when kill count reaches target
         if(killCount >= killCountTarget){
-            gameManager.GetComponent<Startup>().LoadNextLevel();
+            Startup.GetInstance().LoadNextLevel();
         }
         // end game when character health = 0
         if(player.health<=0){
-            gameManager.GetComponent<Startup>().LoadNextLevel();
+            Startup.GetInstance().LoadNextLevel();
         }
         // end the game when time is up
         if(currentTime-startTime >= timeLimit){
-            gameManager.GetComponent<Startup>().LoadNextLevel();
+            Startup.GetInstance().LoadNextLevel();
         }
     }
     private void Awake()

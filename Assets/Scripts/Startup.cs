@@ -11,16 +11,27 @@ public enum EGamestates//These are used for swapping out scenes
 
 public class Startup : MonoBehaviour
 {
-    public static Startup instance;
+    private static Startup instance;
     public int levelNum = 0;// set the level number here
     public EGamestates e_gamestate = EGamestates.LobbyScene;   // for setting the initial game state
     
 
+
+    public static Startup GetInstance()
+    {
+        return instance;
+    }
+
     private void Awake()
     {
-
-        Init();
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("MORE THAN ONE INSTANCE OF GAME MANAGER AAAAAAAAAAAAAA");
+        }
     }
 
     void Start()
