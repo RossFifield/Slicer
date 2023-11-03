@@ -85,4 +85,8 @@ public class PlayerController : MonoBehaviour
             health -=1;
         }
     }
+    void OnDestroy(){
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
 }
